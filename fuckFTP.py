@@ -32,9 +32,7 @@ def check(host, username, passwd):
         print("Host: {}".format(host))
         print("Username: {}".format(username))
         print("Password: {}".format(passwd))
-        
-        realPassword = passwd
-        print("{}".format(realPassword))
+   
         exit(0)
     except:
         pass
