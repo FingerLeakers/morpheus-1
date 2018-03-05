@@ -18,7 +18,7 @@ def help():
 
     Contact:
         github:   github.com/gmdutra
-        Telegram: https://t.me/gmdutra
+        Telegram: https://t.me/g_mdutra
 
 '''
 
@@ -36,14 +36,7 @@ def check(host, username, passwd):
         exit(0)
     except:
         pass
-'''
-def uploadFile(host, username, passwd, file):
-    ftp = FTP(host)
-    ftp.login(username, passwd)
 
-    myfile = open(file, "rb")
-    ftp.storlines('STOR ' + myfile)
-'''
 def loadWordlist(host, username, wordlist):
 
     try:
@@ -74,9 +67,6 @@ def main():
     upload   = given_args.upload
 
     loadWordlist(host, user, wordlist)
-
-    if upload is not None:
-        uploadFile(host, user, realPassword, file)
-
+    
 if __name__ == '__main__':
         main()    
