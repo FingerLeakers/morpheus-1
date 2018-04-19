@@ -2,26 +2,6 @@ from ftplib import FTP
 import argparse
 from sys import exit
 
-realPassword = None
-
-def help():
-    usage = '''
-    
-    usage:
-            --host      <hostname>
-            --user      <username>
-            --wordlist  <wordlist>
-
-    Example:
-
-        python fuckFTP.py --host 192.168.1.1 --user anton --wordlist wordlist.txt
-
-    Contact:
-        github:   github.com/gmdutra
-        Telegram: https://t.me/g_mdutra
-
-'''
-
 def check(host, username, passwd):
 
     try:
