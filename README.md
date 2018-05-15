@@ -1,4 +1,4 @@
-### fuckFTP
+### FTPDown
 ```
 FTPDown is a tool for brute force on FTP servers.
 ```
