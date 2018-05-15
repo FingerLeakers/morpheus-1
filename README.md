@@ -1,6 +1,6 @@
 ### fuckFTP
 ```
-fuckFTP is a tool for brute force on FTP servers.
+FTPDown is a tool for brute force on FTP servers.
 ```
 
 ### How to
@@ -13,7 +13,7 @@ fuckFTP is a tool for brute force on FTP servers.
 
     Example:
 
-        python fuckFTP.py --host 192.168.1.1 --user root --wordlist wordlist.txt
+        python main.py --host 192.168.1.1 --user root --wordlist wordlist.txt
 
     Contact:
 
