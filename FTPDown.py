@@ -28,8 +28,8 @@ def check(host, username, passwd):
         print_result(host, username, passwd)
         return 1
     except:
-        #print (colored(f"[+] user={username} - pass={passwd} - FALIED\r", end="", red))
         print (colored(f"[+] user={username} - pass={passwd} - FALIED", 'red'))
+
 def loadWordlist(host, username, wordlist):
 
     try:
@@ -41,7 +41,7 @@ def loadWordlist(host, username, wordlist):
             check(host, username, line)
 
     except Exception as e:
-        print(f"Error: {e.message}")
+        print("Nao foi possivel abrir o arquivo")
         exit(1)
 
 def print_result(host, username, passwd):
