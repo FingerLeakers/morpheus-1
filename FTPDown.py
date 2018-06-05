@@ -3,6 +3,7 @@ from sys import exit
 import os
 import socket
 import argparse
+from termcolor import colored
 
 def banner():
     print('''
@@ -27,8 +28,8 @@ def check(host, username, passwd):
         print_result(host, username, passwd)
         return 1
     except:
-        print(f"[+] user={username} - pass={passwd} - FALIED\r", end="")
-
+        #print (colored(f"[+] user={username} - pass={passwd} - FALIED\r", end="", red))
+        print (colored(f"[+] user={username} - pass={passwd} - FALIED", 'red'))
 def loadWordlist(host, username, wordlist):
 
     try:
@@ -45,7 +46,7 @@ def loadWordlist(host, username, wordlist):
 
 def print_result(host, username, passwd):
 
-    print(f'''
+    print (colored(f'''
 -------------------------------------------
             Login successful
 -------------------------------------------
@@ -53,7 +54,7 @@ def print_result(host, username, passwd):
 [+]Username = {username}                   
 [+]Password = {passwd}                     
 -------------------------------------------
-        ''')
+        ''', 'blue'))
 
 def main():
 
