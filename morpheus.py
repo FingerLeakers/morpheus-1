@@ -29,7 +29,8 @@ def check(host, username, passwd):
         print_result(host, username, passwd)
         return 1
     except:
-        print (colored(f"[+] user={username} - pass={passwd} - FALIED", 'red'))
+        print (colored("[+] user={0} - pass={1} - FALIED".format(username, \
+                                                                 passwd), 'red'))
 
 def loadWordlist(host, username, wordlist):
 
@@ -47,15 +48,15 @@ def loadWordlist(host, username, wordlist):
 
 def print_result(host, username, passwd):
 
-    print (colored(f'''
+    print (colored('''
 -------------------------------------------
             Login successful
 -------------------------------------------
-[+]Host     = {host}                       
-[+]Username = {username}                   
-[+]Password = {passwd}                     
+[+]Host     = {0}                       
+[+]Username = {1}                   
+[+]Password = {2}                     
 -------------------------------------------
-        ''', 'blue'))
+        '''.format(host, username, passwd), 'blue'))
 
 def main():
 
