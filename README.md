@@ -26,3 +26,6 @@ pip install -r requeriments.txt or pip install termcolor
         linkedin: https://www.linkedin.com/in/gmdutra
         Telegram: @gmdutra
 ```
+
+
+![](https://i.imgur.com/KIB85tv.png)
