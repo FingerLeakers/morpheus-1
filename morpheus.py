@@ -70,7 +70,6 @@ def main():
     host     = given_args.host
     user     = given_args.user
     wordlist = given_args.wordlist
-    upload   = given_args.upload
 
     loadWordlist(host, user, wordlist)
 
