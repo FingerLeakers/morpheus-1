@@ -8,12 +8,14 @@ from termcolor import colored
 def banner():
     print('''
 
-______ ___________  ______                    
-|  ___|_   _| ___ \ |  _  \                   
-| |_    | | | |_/ / | | | |_____      ___ __  
-|  _|   | | |  __/  | | | / _ \ \ /\ / / '_ \ 
-| |     | | | |     | |/ / (_) \ V  V /| | | |
-\_|     \_/ \_|     |___/ \___/ \_/\_/ |_| |_|
+
+███╗   ███╗ ██████╗ ██████╗ ██████╗ ██╗  ██╗███████╗██╗   ██╗███████╗
+████╗ ████║██╔═══██╗██╔══██╗██╔══██╗██║  ██║██╔════╝██║   ██║██╔════╝
+██╔████╔██║██║   ██║██████╔╝██████╔╝███████║█████╗  ██║   ██║███████╗
+██║╚██╔╝██║██║   ██║██╔══██╗██╔═══╝ ██╔══██║██╔══╝  ██║   ██║╚════██║
+██║ ╚═╝ ██║╚██████╔╝██║  ██║██║     ██║  ██║███████╗╚██████╔╝███████║
+╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝
+                                                                     
                                               
 [+]Developer    - Gabriel Dutra(CoolRoot)
 [+]Linkedin     - linkedin.com/in/gmdutra
@@ -29,7 +31,7 @@ def check(host, username, passwd):
         print_result(host, username, passwd)
         return 1
     except:
-        print (colored("[+] user={0} - pass={1} - FALIED".format(username, \
+        print (colored("[+] user={0} - pass={1} - failed".format(username, \
                                                                  passwd), 'red'))
 
 def loadWordlist(host, username, wordlist):
@@ -56,7 +58,7 @@ def print_result(host, username, passwd):
 [+]Username = {1}                   
 [+]Password = {2}                     
 -------------------------------------------
-        '''.format(host, username, passwd), 'blue'))
+        '''.format(host, username, passwd), 'green'))
 
 def main():
 
