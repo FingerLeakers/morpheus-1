@@ -13,7 +13,7 @@ Morpheus is a tool for brute force on FTP servers.
 
     Example:
 
-        python main.py --host 192.168.1.1 --user root --wordlist wordlist.txt
+        python morpheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
 
     Contact:
 
