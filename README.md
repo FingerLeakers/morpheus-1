@@ -3,6 +3,11 @@
 Morpheus is a tool for brute force on FTP servers.
 ```
 
+### Install termcolor
+``` 
+pip install -r requeriments.txt or pip install termcolor
+``` 
+
 ### How to
 
 ```
