@@ -31,7 +31,7 @@ def check(host, username, passwd):
         print_result(host, username, passwd)
         return 1
     except:
-        print (colored("[+] user={0} - pass={1} - failed".format(username, \
+        print (colored("[+]user={0}\tpass={1}\tfailed".format(username, \
                                                                  passwd), 'red'))
 
 def loadWordlist(host, username, wordlist):
