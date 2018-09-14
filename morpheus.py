@@ -1,7 +1,6 @@
 import os
 import socket
 import argparse
-import threading
 
 from ftplib import FTP 
 from sys import exit
