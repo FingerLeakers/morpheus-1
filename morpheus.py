@@ -89,7 +89,7 @@ def main():
     parser.add_argument("--user", '-u',     action="store", dest="user",\
                             required=True)
    
-    parser.add_argument("--wordlist", '-w',  action="store", dest="wordlist",\
+    parser.add_argument("--wordlist", '-w', action="store", dest="wordlist",\
                             required=True)
 
     given_args = parser.parse_args()
