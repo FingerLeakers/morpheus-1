@@ -2,7 +2,6 @@
 import os
 import socket
 import argparse
-import threading
 from sys import exit
 
 def banner():
@@ -43,7 +42,7 @@ help_message = '''
         --wordlist  wordlist used for the attack
 
     Example:
-        python mporheus.py --user root --wordlist wordlist.txt --threads 3
+        python mporheus.py --user root --wordlist wordlist.txt
 
 '''
 
