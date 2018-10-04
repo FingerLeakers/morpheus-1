@@ -37,15 +37,14 @@ def banner():
 
 help_message = '''
     Arguments:
-        --host      target
-        --user      user, default is root
-        --wordlist  wordlist used for the attack
-
+        --host,     -h      target
+        --user,     -u      user, default is root
+        --wordlist, -w      wordlist used for the attack
+    
     Example:
-        python mporheus.py --user root --wordlist wordlist.txt
+        python mporheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
 
 '''
-
 
 class BruteFTB(object):
     def __init__(self, host, user, wordlist):
@@ -79,18 +78,18 @@ class BruteFTB(object):
                     print("------------------------------")
                     exit(0)
                 else:            
-                    print("User: {0} Password: {1} - failed".format(self.host, line.strip()))
+                    print("User: {0} - Password: {1} - failed".format(self.user, line.strip()))
 
 def main():
 
     parser = argparse.ArgumentParser(add_help=False, usage=help_message)
-    parser.add_argument('--host',     action="store", dest="host",\
+    parser.add_argument('--host', '-h',     action="store", dest="host",\
                             required=True)
    
-    parser.add_argument("--user",     action="store", dest="user",\
+    parser.add_argument("--user", '-u',     action="store", dest="user",\
                             required=True)
    
-    parser.add_argument("--wordlist", action="store", dest="wordlist",\
+    parser.add_argument("--wordlist", '-w',  action="store", dest="wordlist",\
                             required=True)
 
     given_args = parser.parse_args()
