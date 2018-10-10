@@ -18,6 +18,14 @@ class BruteSSH():
                 try:
                     status = self.ssh.connect(hostname=self.host, username=self.user,\
                     password=passw.strip(), timeout=0.4)
-            
+                    print("\n\n")
+                    print("----------Successful----------")
+                    print("Protocol: SSH")
+                    print("Target: {0}".format(self.host))
+                    print("Username: {0}".format(self.user))
+                    print("Password: {0}".format(line.strip()))
+                    print("------------------------------")
+                    exit(0)
+ 
                 except paramiko.AuthenticationException:
                     print("failed - {0}".format(passw))
