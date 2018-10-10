@@ -42,7 +42,7 @@ help_message = '''
         --wordlist, -w      wordlist used for the attack
     
     Example:
-        python mporheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
+        python morpheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
 
 '''
 
