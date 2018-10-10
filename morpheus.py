@@ -7,6 +7,7 @@ import argparse
 from multiprocessing import Process
 from sys import exit, platform
 from protocols.ftp import BruteFTB
+from protocols.ssh import BruteSSH
 
 def banner():
     banner = '''
@@ -100,7 +101,8 @@ def main():
         FTP.Checkout()
     
     elif protocol == 'ssh':
-        pass
+        SSH = BruteSSH(host, user, wordlist)
+        SSH.Checkout()
 
 if __name__=='__main__':
     banner()
