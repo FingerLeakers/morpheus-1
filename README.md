@@ -1,6 +1,6 @@
 ### Morpheus
 ```
-Morpheus is a tool for brute force on FTP servers.
+Morpheus is a tool for brute force on servers.
 ```
 
 ### How to
