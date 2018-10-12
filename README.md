@@ -7,13 +7,18 @@ Morpheus is a tool for brute force on servers.
 
 ```
     options:
-            --host      <hostname>
-            --user      <username>
-            --wordlist  <wordlist>
-
+            --host,     -h      <hostname>
+            --user      -u      <username>
+            --wordlist  -w      <wordlist>
+            --protocol  -p      <protocol>
+    
+    Protocols:
+            ftp
+            ssh
+            
     Example:
 
-        python morpheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
+        python morpheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt --protocol ssh
 
     Contact:
 
@@ -21,6 +26,9 @@ Morpheus is a tool for brute force on servers.
         linkedin: https://www.linkedin.com/in/gmdutra
         Telegram: @gmdutra
 
+```
+
+```
 
 
                                 _,-----.
@@ -43,3 +51,4 @@ Morpheus is a tool for brute force on servers.
                      |_\         \_|    |  \\
                                          \__\\
 
+```
