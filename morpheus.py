@@ -75,7 +75,6 @@ def main():
     Example:
         python mporheus.py -h 192.168.1.1 -u root -w wordlist.txt -p ftp
 
-    '''
 
     parser = argparse.ArgumentParser(add_help=False, usage=help_message)
     parser.add_argument('--host', '-h',     action="store", dest="host",\
