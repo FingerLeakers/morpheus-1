@@ -69,9 +69,6 @@ def main():
         ssh
 
     Example:
-        python morpheus.py --host 192.168.1.1 --user root --wordlist wordlist.txt
-
-    Example:
         python mporheus.py -h 192.168.1.1 -u root -w wordlist.txt -p ftp
     '''
 
